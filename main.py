@@ -41,7 +41,7 @@ black_dot_icon = folium.CustomIcon(
 )
 
 # Intialize Map
-m = folium.Map(location=[29.31, 47.41], zoom_start=5, tiles='Cartodb Positron')
+m = folium.Map(location=[29.31, 47.41], zoom_start=5, tiles='Stadia.StamenWatercolor', attr='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors')
 
 
 # Add locations and text to the map
@@ -55,16 +55,40 @@ folium.Marker(
 
 div_html ="""
 <div style="font-family: Brill, sans-serif; font-size: 8pt; text-align: left; color: black">
-    Visited in 210 AH.
+    Makkah <br>
+    First time visited in 210 AH.
 </div>
-
 """
+folium.map.Marker(
+    [KABA[0]-0.5, KABA[1]-0.1],
+    icon=folium.DivIcon(
+        icon_size=(250,36),
+        icon_anchor=(0,0),
+        html=div_html,
+        )
+    ).add_to(m)
+
 #2. Bukahara
 folium.Marker(
     location = BUKHARA , 
     icon = red_star_icon,
     popup = 'Bukhara'
 ).add_to(m)
+
+div_html ="""
+<div style="font-family: Brill, sans-serif; font-size: 8pt; text-align: left; color: black">
+    Bukhara <br>
+    Born here in 194 AH.
+</div>
+"""
+folium.map.Marker(
+    [BUKHARA[0]-0.3, BUKHARA[1]-0.1],
+        icon=folium.DivIcon(
+        icon_size=(250,36),
+        icon_anchor=(0,0),
+        html=div_html,
+        )
+    ).add_to(m)
 
 #3. Baghdad
 folium.Marker(
@@ -73,6 +97,19 @@ folium.Marker(
     popup = 'Baghdad'
 ).add_to(m)
 
+div_html ="""
+<div style="font-family: Brill, sans-serif; font-size: 8pt; text-align: left; color: black">
+    Baghdad
+</div>
+"""
+folium.map.Marker(
+    [BAGHDAD[0]+0.8, BAGHDAD[1]-0.5],
+        icon=folium.DivIcon(
+        icon_size=(250,36),
+        icon_anchor=(0,0),
+        html=div_html,
+        )
+    ).add_to(m)
 
 # Add Polylines
 BUKHARA_to_BAGHDAD=[
@@ -99,7 +136,7 @@ folium.PolyLine(
     locations=BUKHARA_to_BAGHDAD,
     color='#000000',
     weight=2,
-    smooth_factor=1,
+    smooth_factor=3,
     tooltip="Bukhara to Baghdad"
 ).add_to(m)
 folium.RegularPolygonMarker(location=BUKHARA_to_BAGHDAD[3],
@@ -126,7 +163,7 @@ folium.RegularPolygonMarker(location=BAGHDAD_to_MAKKAH[3],
                             fillOpacity=1, 
                             number_of_sides=3, 
                             radius=9, 
-                            rotation=97).add_to(m)
+                            rotation=100).add_to(m)
 
 st_data = st_folium(m, width=1400)
 
