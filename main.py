@@ -167,9 +167,6 @@ feature_group_loc_icons.add_to(m)
 fg_path_childhood.add_to(m)
 folium.LayerControl().add_to(m)
 
-
-st.write(locations)
-st.write(locations.loc['Bukhara'])
 st_data = st_folium(m, width=1600) 
 
 
