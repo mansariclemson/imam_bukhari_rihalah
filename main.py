@@ -44,7 +44,10 @@ m = folium.Map(location=[29.31, 47.41], zoom_start=5, tiles='Stadia.StamenWaterc
 # Decalre feature groups
 feature_group_loc_names = folium.FeatureGroup(name='Display Names')
 feature_group_loc_icons = folium.FeatureGroup(name='Display Icons')
-fg_path_childhood = folium.FeatureGroup(name='Early Childhood')
+fg_path_childhood = folium.FeatureGroup(name='Early Childhood (205-209 AH)')
+fg_path_tomakkah = folium.FeatureGroup(name='First Hajj (210 AH)')
+fg_path_afterhajj = folium.FeatureGroup(name='After Hajj (211-212 AH)')
+
 
 # Add locations and text to the map
 for index, loc in locations.iterrows():
@@ -104,7 +107,7 @@ def add_path(ft_group, startpoint, midpoint, endpoint, num_lines, line_color, li
                                 fillOpacity=1, 
                                 number_of_sides=3, 
                                 radius=arrow_size, 
-                                rotation=180-angle-arrow_dir_adjust).add_to(fg_path_childhood)
+                                rotation=180-angle-arrow_dir_adjust).add_to(ft_group)
 
 # Bukahara to Merv  
 add_path(ft_group=fg_path_childhood, startpoint='Bukhara', midpoint=[[39.28, 62.72]], endpoint='Merv', num_lines = 100, line_wt=2, line_color = '#187e18',
@@ -126,46 +129,51 @@ add_path(ft_group=fg_path_childhood, startpoint='Herat', midpoint=[[34.84, 59.18
          tooltip = "Herat to Nishapur", arrow_size=6, arrow_color = '#000000', arrow_dir_adjust=-90
          )
 
+# Bukhara to Baghdad
+add_path(ft_group=fg_path_tomakkah, startpoint='Bukhara', midpoint=[[39.7, 54.7],[29.0, 55.0], [37.4, 47.3]], endpoint='Baghdad', num_lines = 600, line_wt=2, line_color = '#6e3ac2',
+         tooltip = "Bukhara to Baghdad", arrow_size=7, arrow_color = '#000000', arrow_dir_adjust=180
+         )
 
+# Baghdad to Basra
+add_path(ft_group=fg_path_tomakkah, startpoint='Baghdad', midpoint=[], endpoint='Basra', num_lines = 50, line_wt=2, line_color = '#6e3ac2',
+         tooltip = "Baghdad to Basra", arrow_size=6, arrow_color = '#000000', arrow_dir_adjust=180
+         )
 
+# Basra to Makkah
+add_path(ft_group=fg_path_tomakkah, startpoint='Basra', midpoint=[[25.1, 47.0]], endpoint='Makkah', num_lines = 100, line_wt=2, line_color = '#6e3ac2',
+         tooltip = "Basra to Makkah", arrow_size=6, arrow_color = '#000000', arrow_dir_adjust=0
+         )
 
-"""
-# Bukhara to Merv
-A_to_B = bz([
-                [locations.loc['Bukhara']['lat'], locations.loc['Bukhara']['long']],
-                [39.52, 62.68],
-                [locations.loc['Merv']['lat'], locations.loc['Merv']['long']]
-            ],
-            n=100, t=True)
-folium.PolyLine(
-    locations=A_to_B,
-    color='#40514E',
-    weight=1,
-    smooth_factor=0,
-    tooltip="Bukhara to Merv"
-).add_to(fg_path_childhood)
+# Makkah to Qaysariyya
+add_path(ft_group=fg_path_afterhajj, startpoint='Makkah', midpoint=[[23.5, 39.0],[25,37]], endpoint='Qaysariyya', num_lines = 300, line_wt=2, line_color = '#570e3e',
+         tooltip = "Makkah to Palestine", arrow_size=6, arrow_color = '#000000', arrow_dir_adjust=90
+         )
 
-# Find slope
-mid_of_line = int(len(A_to_B)/2)
-slope = (A_to_B[mid_of_line][1]-A_to_B[mid_of_line-1][1]) / (A_to_B[mid_of_line][0]-A_to_B[mid_of_line-1][0])
-angle = degrees(atan(slope))
-folium.RegularPolygonMarker(location=A_to_B[mid_of_line],
-                            fill_color='black',
-                            color='black', #border color
-                            opacity = 0, #border opacity
-                            fillOpacity=1, 
-                            number_of_sides=3, 
-                            radius=5, 
-                            rotation=180-angle).add_to(fg_path_childhood)
-    
-"""
+# Qaysariyya to Kufa
+add_path(ft_group=fg_path_afterhajj, startpoint='Qaysariyya', midpoint=[[29,40]], endpoint='Kufa', num_lines = 300, line_wt=2, line_color = '#570e3e',
+         tooltip = "Palestine to Kufa", arrow_size=6, arrow_color = '#000000', arrow_dir_adjust=0
+         )
 
+# Kufa to Medina
+add_path(ft_group=fg_path_afterhajj, startpoint='Kufa', midpoint=[[28,43]], endpoint='Medina', num_lines = 200, line_wt=2, line_color = '#570e3e',
+         tooltip = "Kufa to Medina", arrow_size=6, arrow_color = '#000000', arrow_dir_adjust=30
+         )
+
+# Medina to Makkah
+add_path(ft_group=fg_path_afterhajj, startpoint='Medina', midpoint=[], endpoint='Makkah', num_lines = 5, line_wt=2, line_color = '#570e3e',
+         tooltip = "Medina to Makkah", arrow_size=6, arrow_color = '#000000', arrow_dir_adjust=90
+         )
  
 feature_group_loc_names.add_to(m)
 feature_group_loc_icons.add_to(m)
 fg_path_childhood.add_to(m)
+fg_path_tomakkah.add_to(m)
+fg_path_afterhajj.add_to(m)
+
+
 folium.LayerControl().add_to(m)
 
-st_data = st_folium(m, width=1600) 
+st_data = st_folium(m, width=1200) 
+
 
 
