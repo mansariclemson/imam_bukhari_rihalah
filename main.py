@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import folium
-import copy
 from streamlit_folium import st_folium
 import branca
 from math import comb as r
