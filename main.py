@@ -38,7 +38,12 @@ def bz(c,n=10,t=False):
 
 # Intialize Map
 #m = folium.Map(location=[29.31, 47.41], zoom_start=5, tiles='Stadia.StamenWatercolor', attr='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Madina logo by Quda designs')
-m = folium.Map(location=[29.31, 47.41], zoom_start=5, tiles='Stadia.StamenTerrainBackground', attr='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors')
+#m = folium.Map(location=[29.31, 47.41], zoom_start=5, tiles='Esri.WorldPhysical', attr='Tiles &copy; Esri &mdash; Source: US National Park Service')
+#m = folium.Map(location=[29.31, 47.41], zoom_start=5, tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', attr='Tiles &copy; Esri &mdash; Source: US National Park Service')
+m = folium.Map(location=[29.31, 47.41], zoom_start=5, tiles='https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>')
+
+
+
 
 
 # Decalre feature groups
