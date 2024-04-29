@@ -38,7 +38,7 @@ def bz(c,n=10,t=False):
 
 # Intialize Map
 #m = folium.Map(location=[29.31, 47.41], zoom_start=5, tiles='Stadia.StamenWatercolor', attr='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Madina logo by Quda designs')
-m = folium.Map(location=[29.31, 47.41], zoom_start=5, tiles='Stadia.StamenWatercolor', attr='&')
+m = folium.Map(location=[29.31, 47.41], zoom_start=5, tiles='Stadia.StamenTerrainBackground', attr='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors')
 
 
 # Decalre feature groups
